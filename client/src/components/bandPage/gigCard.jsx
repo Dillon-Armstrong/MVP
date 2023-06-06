@@ -1,5 +1,5 @@
 import React from 'react';
-import { viewContext } from './app';
+import { viewContext } from '../app';
 
 export default function BandCard({ gig }) {
   const { setView } = React.useContext(viewContext);
@@ -12,8 +12,9 @@ export default function BandCard({ gig }) {
       <h3>{gig.gigname}</h3>
       <p>Where: {gig.location}</p>
       <p>When: {gig.date}</p>
-      <p>Gear: {gig.gear_needed}</p>
-      <button type="button" onClick={handleClick}> view </button>
+      <p>Gear: {gig.gear_needed}
+        <button type="button" onClick={handleClick}> ? </button>
+      </p>
     </>
   )
 }
