@@ -10,6 +10,7 @@ export default function App() {
   const [member, setMember] = React.useState({});
   const [bands, setBands] = React.useState([]);
   const [currentBand, setCurrentBand] = React.useState({});
+  const [gigs, setGigs] = React.useState([])
 
   React.useEffect(() => {
     axios.get('/member', {params: {member_id: 2}})
@@ -30,7 +31,7 @@ export default function App() {
     return (
       <>
         <h1>GigMate/{member.name}/Bands</h1>
-        <viewContext.Provider  value= {{ setView, currentBand, setCurrentBand }}>
+        <viewContext.Provider  value= {{ setView, currentBand, setCurrentBand, gigs, setGigs }}>
           <BandList member={member} bands={bands}/>
         </viewContext.Provider>
       </>
