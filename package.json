@@ -4,7 +4,8 @@
   "description": "MVP project for HR 2303",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server-dev": "nodemon server index.js",
+    "react-dev": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "morgan": "^1.10.0",
     "pg": "^8.11.0",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-native": "^0.71.8"
   },
   "devDependencies": {
