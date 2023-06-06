@@ -1,19 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import GigCard from './gigCard';
+import { viewContext } from '../app';
 
 export default function GigsList() {
-  const [gigs, setGigs] = React.useState([])
-  React.useEffect(() => {
-    axios.get('/gigs', {params: {band_id: 3}})
-    .then(res => {
-      console.log(res.data)
-      setGigs(res.data)
-    })
-  },[])
+  const { gigs } = React.useContext(viewContext);
+  const [loading, setLoading] = React.useState(true);
+
   return (
-    gigs.length
-    ? gigs.map(gig => <GigCard key={gig.band_id} gig={gig} />)
-    : <div>getting your gigs</div>
+    gigs.map(gig => <GigCard key={gig.gig_id} gig={gig} />)
   )
 }
