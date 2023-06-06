@@ -1,0 +1,42 @@
+{
+  "name": "mvp",
+  "version": "1.0.0",
+  "description": "MVP project for HR 2303",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "nodemon server index.js",
+    "react-dev": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dillon-Armstrong/MVP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dillon-Armstrong/MVP/issues"
+  },
+  "homepage": "https://github.com/Dillon-Armstrong/MVP#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native": "^0.71.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-react": "^7.22.3",
+    "babel": "^6.23.0",
+    "babel-loader": "^9.1.2",
+    "nodemon": "^2.0.22",
+    "webpack": "^5.85.1",
+    "webpack-cli": "^5.1.3"
+  }
+}
