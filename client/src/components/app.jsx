@@ -7,13 +7,21 @@ export const viewContext = React.createContext(null)
 
 export default function App() {
   const [view, setView] = React.useState('');
-  const [member, setMember] = React.useState({})
+  const [member, setMember] = React.useState({});
+  const [bands, setBands] = React.useState([]);
+  const [currentBand, setCurrentBand] = React.useState({});
 
   React.useEffect(() => {
     axios.get('/member', {params: {member_id: 2}})
     .then(res => {
-      console.log(res.data)
-      setmember(res.data[0])
+      setMember(res.data[0]);
+      return axios.get('/bands', {params: {member_id: res.data[0].member_id}})
+    })
+    .then(res => {
+      setBands(res.data)
+    })
+    .catch(err => {
+      throw Error(err);
     })
   },[])
 
@@ -22,8 +30,8 @@ export default function App() {
     return (
       <>
         <h1>GigMate/{member.name}/Bands</h1>
-        <viewContext.Provider  value= {{ setView, member }}>
-          <BandList />
+        <viewContext.Provider  value= {{ setView, currentBand, setCurrentBand }}>
+          <BandList member={member} bands={bands}/>
         </viewContext.Provider>
       </>
     );
@@ -32,7 +40,7 @@ export default function App() {
       <>
         <h1>GigMate/${member.name}</h1>
         <viewContext.Provider  value= {{ setView, member }}>
-          <BandPage />
+          <BandPage member={member} />
         </viewContext.Provider>
       </>
     );
