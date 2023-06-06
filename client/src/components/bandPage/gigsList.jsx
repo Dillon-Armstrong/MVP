@@ -5,10 +5,9 @@ import { viewContext } from '../app';
 
 export default function GigsList() {
   const { gigs } = React.useContext(viewContext);
-  console.log(gigs)
+  const [loading, setLoading] = React.useState(true);
+
   return (
-    gigs
-    ? gigs.map(gig => <GigCard key={gig.band_id} gig={gig} />)
-    : <div>getting your gigs</div>
+    gigs.map(gig => <GigCard key={gig.gig_id} gig={gig} />)
   )
 }

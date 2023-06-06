@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import BandList from './bandList';
+import BandList from './memberHome/bandList';
 import BandPage from './bandPage/bandPage';
 
 export const viewContext = React.createContext(null)
@@ -10,7 +10,7 @@ export default function App() {
   const [member, setMember] = React.useState({});
   const [bands, setBands] = React.useState([]);
   const [currentBand, setCurrentBand] = React.useState({});
-  const [gigs, setGigs] = React.useState([])
+  const [gigs, setGigs] = React.useState([]);
 
   React.useEffect(() => {
     axios.get('/member', {params: {member_id: 2}})
@@ -26,12 +26,25 @@ export default function App() {
     })
   },[])
 
+  // const getGigs = (band) => {
+  //   setCurrentBand(band);
+  //   console.log(band)
+  //   axios.get('/gigs', {params: {band_id: band.band_id}})
+  //     .then(res => {
+  //       setGigs(res.data)
+  //       setView('BandPage');
+  //     })
+  //     .catch(err => {
+  //       throw Error(err)
+  //     })
+  // }
+
   switch (view) {
     case 'Bands':
     return (
       <>
         <h1>GigMate/{member.name}/Bands</h1>
-        <viewContext.Provider  value= {{ setView, currentBand, setCurrentBand, gigs, setGigs }}>
+        <viewContext.Provider  value= {{ setView, setCurrentBand, setGigs }}>
           <BandList member={member} bands={bands}/>
         </viewContext.Provider>
       </>
@@ -39,9 +52,9 @@ export default function App() {
     case 'BandPage':
     return (
       <>
-        <h1>GigMate/${member.name}</h1>
-        <viewContext.Provider  value= {{ setView, member }}>
-          <BandPage member={member} />
+        <h1>GigMate/${member.name}/{currentBand.band_name}</h1>
+        <viewContext.Provider  value= {{ gigs }}>
+          <BandPage setView={setView} />
         </viewContext.Provider>
       </>
     );
