@@ -3,20 +3,12 @@ import axios from 'axios';
 import { viewContext } from '../app';
 
 export default function BandCard({ band }) {
-  const { setCurrentBand, setView, setGigs } = React.useContext(viewContext);
+  const { setCurrentBand, goToBandPage } = React.useContext(viewContext);
 
   const handleClick = (e) => {
     e.preventDefault();
     setCurrentBand(band);
-    console.log(band)
-    axios.get('/gigs', {params: {band_id: band.band_id}})
-      .then(res => {
-        setGigs(res.data)
-        setView('BandPage');
-      })
-      .catch(err => {
-        throw Error(err)
-      })
+    goToBandPage(band);
   }
 
   return (

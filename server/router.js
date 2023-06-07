@@ -7,7 +7,11 @@ router.get('/member', controllers.get.member);
 router.get('/members', controllers.get.allMembers);
 router.get('/bands', controllers.get.bands);
 router.get('/gigs', controllers.get.gigs);
+router.get('/login', controllers.get.login);
+
 router.post('/gigs', controllers.post.gig);
-router.delete('/gigs', controllers.delete.gig)
+router.post('/newUser', controllers.post.user)
+
+router.delete('/gigs', controllers.delete.gig);
 
 module.exports = { router }

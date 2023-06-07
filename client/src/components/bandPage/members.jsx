@@ -13,6 +13,9 @@ const [members, setMembers] = React.useState([]);
   },[])
 
   return (
-    members.map(member => <MemberCard key={member.member_id} member={member} />)
+    <>
+      <h2> Band Mates </h2>
+      {members.map(member => <MemberCard key={member.member_id} member={member} />)}
+    </>
   )
 }

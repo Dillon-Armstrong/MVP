@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function MemberCard({ member }) {
   return (
-    <>
+    <div className="members">
       <img
         style={{
             border: '3px solid blue',
@@ -17,6 +17,6 @@ export default function MemberCard({ member }) {
       />
       <div>{member.name}</div>
       <div>{member.role[0]}</div>
-    </>
+    </div>
   )
 }
