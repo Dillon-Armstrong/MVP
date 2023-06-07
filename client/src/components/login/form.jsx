@@ -1,26 +1,39 @@
 import React from 'react';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs-react';
 import axios from 'axios';
+import { viewContext } from '../app';
 
 export default function SignUp() {
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = React.useState('')
+  const { goToMemberHome } = React.useContext(viewContext);
 
   const sliceSpuds = (e) => {
-    setPassword(e.taget.value)
+    setPassword(e.target.value)
   }
 
   const hash = (potatoes) => {
     const salt = bcrypt.genSaltSync(10);
     const browns = bcrypt.hashSync(potatoes, salt);
+    return browns
   }
 
   const registerUser = (e) => {
     e.preventDefault()
-    const hashBrowns = hash(potatoes);
+    const hashBrowns = hash(password);
     const form = new FormData(e.target);
-    form.append('password', hashBrowns);
     const breakfast = Object.fromEntries(form.entries());
-    console.log(breakfast)
+    breakfast.password = hashBrowns;
+    axios.post('/newUser', breakfast)
+      .then(res => {
+        console.log('member info saved')
+        goToMemberHome(breakfast.email)
+      })
+      .catch(err => {
+        console.log(err)
+        if (res.status === 406) {
+          alert('Email already registered with this site. Did you mean to log in?')
+        }
+      })
   }
 
   return (
@@ -30,11 +43,12 @@ export default function SignUp() {
         Username: <input name="name" required />
       </label>
       <label>
-        Email: <input type="email" name="member_email" required />
+        Email: <input type="email" name="email" required />
       </label>
       <label>
-        Password: <input type="password" name="password" minlength="8" onChange={sliceSpuds} required />
+        Password: <input type="password" minlength="8" onChange={sliceSpuds} value={password} required />
       </label>
+      <button type="submit" >register</button>
      </form>
    </>
   )

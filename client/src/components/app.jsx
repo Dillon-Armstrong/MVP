@@ -25,8 +25,8 @@ export default function App() {
       throw Error(err)
     })
   }
-  const goToMemberHome = () => {
-    axios.get('/member', {params: {member_id: 2}})
+  const goToMemberHome = (email) => {
+    axios.get('/member', {params: {email: email}})
     .then(res => {
       setMember(res.data[0]);
       return axios.get('/bands', {params: {member_id: res.data[0].member_id}})
@@ -58,7 +58,7 @@ export default function App() {
     return (
       <>
         <h1>
-          <button onClick={goToMemberHome}> {'<- Bands'} </button>
+          <button onClick={() => goToMemberHome(member.email)}> {'<- Bands'} </button>
           GigMate/${member.name}/{currentBand.band_name}
         </h1>
         <div className="page">
@@ -70,7 +70,9 @@ export default function App() {
     );
     case 'signin':
     return (
-      <LandingPage />
+      <viewContext.Provider  value= {{ goToMemberHome }}>
+        <LandingPage />
+      </viewContext.Provider>
     )
     default:
     }

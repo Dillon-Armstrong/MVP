@@ -1,14 +1,26 @@
 const { db } = require('./index');
 
 module.exports.query = {
-  findMember: (member_id) => {
+  addMember: (member_info) => {
+    let args = Object.values(member_info)
     return db.query(`
-    SELECT * FROM members WHERE member_id = ${member_id}
+    INSERT INTO members (name, email, password)
+    VALUES ('"${args[0]}"', '"${args[1]}"', '"${args[2]}"')
+    `)
+  },
+  verify: (email) => {
+    return db.query(`
+    SELECT email, password FROM members WHERE email = '"${email}"'
+    `)
+  },
+  findMember: (email) => {
+    return db.query(`
+    SELECT member_id, name, email, role, bands FROM members WHERE email = '"${email}"'
     `)
   },
   findAllMembers: (band_id) => {
     return db.query(`
-    SELECT * FROM members WHERE EXISTS (
+    SELECT member_id, name, email, role, bands FROM members WHERE EXISTS (
       SELECT 1 from jsonb_array_elements(bands) AS band
       WHERE band ->> 'band_id' = '${band_id}'
     )

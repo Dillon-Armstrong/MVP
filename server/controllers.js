@@ -2,8 +2,22 @@ const { query } = require('../db/models');
 
 module.exports.get = {
 
+  login: (req, res) => {
+    query.verify(req.query.email)
+      .then(results => {
+        if (req.query.password === results.rows.password) {
+          res.sendStatus(200)
+        } else {
+          res.sendStatus(406)
+        }
+      })
+      .catch(err => {
+        res.sendStatus(402)
+        throw Error(err);
+      })
+  },
   member: (req, res) => {
-    query.findMember(req.query.member_id)
+    query.findMember(req.query.email)
       .then(results => {
         res.status(200).send(JSON.stringify(results.rows))
       })
@@ -54,6 +68,28 @@ module.exports.post = {
         res.sendStatus(402)
         throw Error(err);
       })
+  },
+  user: (req, res) => {
+    query.verify(req.body.email)
+    .then(results => {
+      if (results.rows.length){
+        res.sendStatus(406)
+      } else {
+        query.addMember(req.body)
+        .then(results => {
+          console.log('results', results)
+          res.status(201).send('new member registered')
+        })
+        .catch(err => {
+          res.sendStatus(402)
+          throw Error(err);
+        })
+      }
+    })
+    .catch(err => {
+      res.sendStatus(400)
+          throw Error(err);
+    })
   }
 }
 
