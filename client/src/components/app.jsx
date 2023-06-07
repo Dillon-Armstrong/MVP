@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import BandList from './memberHome/bandList';
 import BandPage from './bandPage/bandPage';
-import SignIn from './login/signin';
+import LandingPage from './login/page';
 
 export const viewContext = React.createContext(null)
 
@@ -40,9 +40,9 @@ export default function App() {
     })
 
   }
-  React.useEffect(() => {
-    goToMemberHome()
-  },[])
+  // React.useEffect(() => {
+  //   goToMemberHome()
+  // },[])
 
   switch (view) {
     case 'MemberHome':
@@ -70,7 +70,7 @@ export default function App() {
     );
     case 'signin':
     return (
-      <SignIn />
+      <LandingPage />
     )
     default:
     }
