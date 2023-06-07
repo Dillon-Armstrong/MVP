@@ -24,7 +24,25 @@ module.exports.query = {
   },
   getGigs: (band_id) => {
     return db.query(`
-    select * from gigs where band = ${band_id}
+      SELECT * FROM gigs WHERE band = ${band_id}
+    `)
+  },
+  addGig: (data) => {
+    let args = Object.values(data)
+    return db.query(`
+    BEGIN;
+      INSERT INTO gigs (gig_name, date, location, gear_needed, band)
+        VALUES ('"${args[0]}"','"${args[1]}"','"${args[2]}"','"${args[3]}"',${args[4]});
+      UPDATE bands SET gigs = gigs + 1 WHERE band_id = ${args[4]};
+    COMMIT;
+    `)
+  },
+  removeGig: (gig_id, band_id) => {
+    return db.query(`
+    BEGIN;
+      DELETE FROM gigs WHERE gig_id = ${gig_id};
+      UPDATE bands SET gigs = gigs - 1 WHERE band_id = ${band_id};
+    COMMIT;
     `)
   }
 }

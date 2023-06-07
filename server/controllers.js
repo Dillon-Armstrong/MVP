@@ -43,3 +43,29 @@ module.exports.get = {
       })
   }
 }
+
+module.exports.post = {
+  gig: (req, res) => {
+    query.addGig(req.body)
+      .then(results => {
+        res.status(201).send('successfully posted')
+      })
+      .catch(err => {
+        res.sendStatus(402)
+        throw Error(err);
+      })
+  }
+}
+
+module.exports.delete = {
+  gig: (req, res) => {
+    query.removeGig(req.query.gig_id, req.query.band_id)
+      .then(results => {
+        res.status(201).send('item removed');
+      })
+      .catch(err => {
+        res.sendStatus(402)
+        throw Error(err);
+      })
+  }
+}
