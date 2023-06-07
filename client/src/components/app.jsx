@@ -26,19 +26,6 @@ export default function App() {
     })
   },[])
 
-  // const getGigs = (band) => {
-  //   setCurrentBand(band);
-  //   console.log(band)
-  //   axios.get('/gigs', {params: {band_id: band.band_id}})
-  //     .then(res => {
-  //       setGigs(res.data)
-  //       setView('BandPage');
-  //     })
-  //     .catch(err => {
-  //       throw Error(err)
-  //     })
-  // }
-
   switch (view) {
     case 'Bands':
     return (
@@ -53,7 +40,7 @@ export default function App() {
     return (
       <>
         <h1>GigMate/${member.name}/{currentBand.band_name}</h1>
-        <viewContext.Provider  value= {{ gigs }}>
+        <viewContext.Provider  value= {{ setView, gigs, currentBand }}>
           <BandPage setView={setView} />
         </viewContext.Provider>
       </>

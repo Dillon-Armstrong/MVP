@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import MemberCard from './memberCard';
 
 export default function Members() {
 const [members, setMembers] = React.useState([]);
@@ -12,6 +13,6 @@ const [members, setMembers] = React.useState([]);
   },[])
 
   return (
-    members.map(member => <div key={member.member_id}>{member.name}</div>)
+    members.map(member => <MemberCard key={member.member_id} member={member} />)
   )
 }
