@@ -2,9 +2,9 @@ import React from 'react';
 import GigList from './gigsList';
 import Members from './members';
 
-export default function BandPage({ setView }) {
+export default function BandPage({ goToMemberHome }) {
   const handleClick = (e) => {
-    setView('Bands')
+    goToMemberHome();
   }
   return (
     <>

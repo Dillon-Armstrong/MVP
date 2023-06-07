@@ -4,14 +4,15 @@ import { viewContext } from '../app';
 import axios from 'axios';
 
 export default function GigCard({ gig }) {
-  const { setView, currentBand} = React.useContext(viewContext);
+  const { goToBandPage, currentBand} = React.useContext(viewContext);
   const [modal, setModal] = React.useState(false);
 
   const removeGig = (e) => {
-    console.log(currentBand)
+    e.preventDefault();
     axios.delete('/gigs', {params: { gig_id: gig.gig_id, band_id: currentBand.band_id }})
       .then(res => {
-        setView('BandPage');
+        console.log('success');
+        goToBandPage(currentBand);
       })
       .catch(err => {
         alert('cannot delete right now')

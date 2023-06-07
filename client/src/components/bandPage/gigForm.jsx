@@ -5,7 +5,7 @@ import { viewContext } from '../app';
 
 export default function GigForm({ band, setForm }) {
   const [modal, setModal] = React.useState(false);
-  const { setGigs } = React.useContext(viewContext);
+  const { goToBandPage } = React.useContext(viewContext);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -15,15 +15,11 @@ export default function GigForm({ band, setForm }) {
     axios.post('/gigs', formObject)
       .then(res => {
         setForm(false);
-        return axios.get('/gigs', {params: {band_id: band.band_id}});
-      })
-      .then(res => {
-        React.useEffect(() => {
-          setGigs(res.data);
-        }, [])
+        goToBandPage(band)
       })
       .catch((err) => {
         setForm(false);
+        console.log(err)
         alert('Service unavailable right now. Please try again later');
       })
   }

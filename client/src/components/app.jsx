@@ -12,7 +12,19 @@ export default function App() {
   const [currentBand, setCurrentBand] = React.useState({});
   const [gigs, setGigs] = React.useState([]);
 
-  React.useEffect(() => {
+
+  const goToBandPage = (band) => {
+    setCurrentBand(band)
+    setView('BandPage');
+    axios.get('/gigs', {params: {band_id: band.band_id}})
+    .then(res => {
+      setGigs(res.data)
+    })
+    .catch(err => {
+      throw Error(err)
+    })
+  }
+  const goToMemberHome = () => {
     axios.get('/member', {params: {member_id: 2}})
     .then(res => {
       setMember(res.data[0]);
@@ -20,18 +32,23 @@ export default function App() {
     })
     .then(res => {
       setBands(res.data)
+      setView('MemberHome')
     })
     .catch(err => {
       throw Error(err);
     })
+
+  }
+  React.useEffect(() => {
+    goToMemberHome()
   },[])
 
   switch (view) {
-    case 'Bands':
+    case 'MemberHome':
     return (
       <>
         <h1>GigMate/{member.name}/Bands</h1>
-        <viewContext.Provider  value= {{ setView, setCurrentBand, setGigs }}>
+        <viewContext.Provider  value= {{ goToBandPage, setCurrentBand }}>
           <BandList member={member} bands={bands}/>
         </viewContext.Provider>
       </>
@@ -40,13 +57,13 @@ export default function App() {
     return (
       <>
         <h1>GigMate/${member.name}/{currentBand.band_name}</h1>
-        <viewContext.Provider  value= {{ setView, gigs, currentBand }}>
-          <BandPage setView={setView} />
+        <viewContext.Provider  value= {{ goToBandPage, gigs, currentBand }}>
+          <BandPage goToMemberHome={goToMemberHome} />
         </viewContext.Provider>
       </>
     );
     default:
     }
-  setView('Bands')
+  setView('MemberHome')
   return <div>Loading...</div>
 }
