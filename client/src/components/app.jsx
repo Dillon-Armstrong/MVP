@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import BandList from './memberHome/bandList';
 import BandPage from './bandPage/bandPage';
+import SignIn from './login/signin';
 
 export const viewContext = React.createContext(null)
 
 export default function App() {
-  const [view, setView] = React.useState('');
+  const [view, setView] = React.useState('signin');
   const [member, setMember] = React.useState({});
   const [bands, setBands] = React.useState([]);
   const [currentBand, setCurrentBand] = React.useState({});
@@ -56,14 +57,23 @@ export default function App() {
     case 'BandPage':
     return (
       <>
-        <h1>GigMate/${member.name}/{currentBand.band_name}</h1>
-        <viewContext.Provider  value= {{ goToBandPage, gigs, currentBand }}>
-          <BandPage goToMemberHome={goToMemberHome} />
-        </viewContext.Provider>
+        <h1>
+          <button onClick={goToMemberHome}> {'<- Bands'} </button>
+          GigMate/${member.name}/{currentBand.band_name}
+        </h1>
+        <div className="page">
+          <viewContext.Provider  value= {{ goToBandPage, gigs, currentBand }}>
+            <BandPage />
+          </viewContext.Provider>
+        </div>
       </>
     );
+    case 'signin':
+    return (
+      <SignIn />
+    )
     default:
     }
-  setView('MemberHome')
+  setView('signin')
   return <div>Loading...</div>
 }
