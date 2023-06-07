@@ -24,7 +24,7 @@ export default function SignIn() {
     const form = new FormData(e.target);
     const breakfast = Object.fromEntries(form.entries());
     breakfast.password = hashBrowns;
-    axios.get('/login', {param: {bacon: breakfast}})
+    axios.post('/login', breakfast)
       .then(res => {
         if (res.status === 200) {
           goToMemberHome(breakfast.email);

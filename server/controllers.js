@@ -1,21 +1,8 @@
 const { query } = require('../db/models');
+const bcrypt = require('bcryptjs-react');
 
 module.exports.get = {
 
-  login: (req, res) => {
-    query.verify(req.query.email)
-      .then(results => {
-        if (req.query.password === results.rows.password) {
-          res.sendStatus(200)
-        } else {
-          res.sendStatus(406)
-        }
-      })
-      .catch(err => {
-        res.sendStatus(402)
-        throw Error(err);
-      })
-  },
   member: (req, res) => {
     query.findMember(req.query.email)
       .then(results => {
@@ -59,6 +46,20 @@ module.exports.get = {
 }
 
 module.exports.post = {
+  login: (req, res) => {
+    query.verify(req.body.email)
+      .then(results => {
+        if (bcrypt.compare(req.body.password, results.rows[0].password)) {
+          res.sendStatus(200)
+        } else {
+          res.sendStatus(406)
+        }
+      })
+      .catch(err => {
+        res.sendStatus(402)
+        throw Error(err);
+      })
+  },
   gig: (req, res) => {
     query.addGig(req.body)
       .then(results => {
