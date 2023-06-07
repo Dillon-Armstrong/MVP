@@ -1,6 +1,6 @@
 ### node etc ###
 .env
-.bundle
+bundle
 # Logs
 logs
 *.log
