@@ -1,4 +1,6 @@
 import React from 'react';
+import avatar from '../../../dist/icons8-avatar-48.png';
+
 
 export default function MemberCard({ member }) {
   return (
@@ -13,7 +15,7 @@ export default function MemberCard({ member }) {
           }}
         className="avatar"
         alt="avatar"
-        src={'find an image'}
+        src={avatar}
       />
       <div>{member.name} on: </div>
       <div>
