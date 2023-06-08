@@ -13,9 +13,12 @@ const [members, setMembers] = React.useState([]);
   },[])
 
   return (
-    <>
+    <div className="page-section">
       <h2> Band Mates </h2>
+      <div></div>
+      <div>name</div>
+      <div>roles</div>
       {members.map(member => <MemberCard key={member.member_id} member={member} />)}
-    </>
+    </div>
   )
 }

@@ -20,7 +20,7 @@ export default function GigCard({ gig }) {
   }
 
   return (
-    <>
+    <div className="card">
       <h3>{gig.gig_name}</h3>
       <p>Where: {gig.location}</p>
       <p>When: {gig.date}</p>
@@ -32,6 +32,6 @@ export default function GigCard({ gig }) {
       }
       </div>
       <button type="delete" onClick={removeGig}>remove</button>
-    </>
+    </div>
   )
 }

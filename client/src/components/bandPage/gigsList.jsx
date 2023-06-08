@@ -9,12 +9,12 @@ export default function GigsList() {
   const [form, setForm] = React.useState(false);
 
   return (
-    <>
+    <div className="page-section">
       {form
       ? <GigForm band={currentBand} setForm={setForm}/>
       : <button onClick={() => {setForm(true)}}>Add a Gig</button>
       }
       {gigs.map(gig => <GigCard key={gig.gig_id} gig={gig}/>)}
-    </>
+    </div>
   )
 }

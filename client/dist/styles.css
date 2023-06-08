@@ -26,8 +26,26 @@ h1 {
   color: var(--light-alt)
 }
 
-.page {
-  margin-top: 30%;
+button {
+  background-color: var(--dark-alt);
+  color: var(--light-alt);
+}
+
+#register {
+  display:table-caption;
+}
+
+.page-section {
+  margin: 10%;
+}
+
+.card {
+  margin: 3%;
+  padding: 1%;
+  border-radius: 8px;
+  margin-top: 15%;
+  box-shadow: 0 0 10px var(--main-light);
+  width: max-content;
 }
 
 .members {

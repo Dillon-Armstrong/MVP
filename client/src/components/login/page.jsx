@@ -4,7 +4,7 @@ import SignUp from './form';
 
 export default function LandingPage() {
   return (
-    <div className="page">
+    <div className="page card">
       <SignIn />
         or
       <SignUp />

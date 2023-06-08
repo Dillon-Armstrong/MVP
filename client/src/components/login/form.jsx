@@ -37,7 +37,7 @@ export default function SignUp() {
   }
 
   return (
-   <>
+   <div id="register">
      <form onSubmit={registerUser}>
       <label>
         Username: <input name="name" required />
@@ -50,6 +50,6 @@ export default function SignUp() {
       </label>
       <button type="submit" >register</button>
      </form>
-   </>
+   </div>
   )
 }

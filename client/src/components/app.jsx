@@ -70,9 +70,12 @@ export default function App() {
     );
     case 'signin':
     return (
-      <viewContext.Provider  value= {{ goToMemberHome }}>
-        <LandingPage />
-      </viewContext.Provider>
+      <>
+        <h1>GigMate/</h1>
+        <viewContext.Provider  value= {{ goToMemberHome }}>
+          <LandingPage />
+        </viewContext.Provider>
+      </>
     )
     default:
     }

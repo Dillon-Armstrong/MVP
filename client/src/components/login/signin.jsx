@@ -36,10 +36,8 @@ export default function SignIn() {
   }
 
   return (
-    <>
-      <GoogleSignInButton />
+    <div>
       <form onSubmit={signIn}>
-        Sign In
         <label>
           email: <input name="email" type="email" required />
         </label>
@@ -48,6 +46,6 @@ export default function SignIn() {
         </label>
         <button type="submit">log in</button>
       </form>
-    </>
+    </div>
   )
 }

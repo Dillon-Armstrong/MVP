@@ -12,11 +12,11 @@ export default function BandCard({ band }) {
   }
 
   return (
-    <>
+    <div className="card">
       <h3>{band.band_name}</h3>
       <p>members: {band.members.length}</p>
       <p>upcoming gigs: {band.gigs}</p>
       <button type="button" onClick={handleClick}> view </button>
-    </>
+    </div>
   )
 }

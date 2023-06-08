@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function MemberCard({ member }) {
   return (
-    <div className="members">
+    <div className="members card">
       <img
         style={{
             border: '3px solid blue',
@@ -15,8 +15,10 @@ export default function MemberCard({ member }) {
         alt="avatar"
         src={'find an image'}
       />
-      <div>{member.name}</div>
-      <div>{member.role[0]}</div>
+      <div>{member.name} on: </div>
+      <div>
+        {member.role.map(r => <div>{r}</div>)}
+      </div>
     </div>
   )
 }
