@@ -48,7 +48,7 @@ export default function App() {
     case 'MemberHome':
     return (
       <>
-        <h1>GigMate/{member.name}/Bands</h1>
+        <h1>GearedUp/{member.name}/Bands</h1>
         <viewContext.Provider  value= {{ goToBandPage, setCurrentBand }}>
           <BandList member={member} bands={bands}/>
         </viewContext.Provider>
@@ -59,7 +59,7 @@ export default function App() {
       <>
         <h1>
           <button onClick={() => goToMemberHome(member.email)}> {'<- Bands'} </button>
-          GigMate/{member.name}/{currentBand.band_name}
+          GearedUp/{member.name}/{currentBand.band_name}
         </h1>
         <div className="page">
           <viewContext.Provider  value= {{ goToBandPage, gigs, currentBand }}>
@@ -71,7 +71,7 @@ export default function App() {
     case 'signin':
     return (
       <>
-        <h1>GigMate/</h1>
+        <h1>GearedUp/</h1>
         <viewContext.Provider  value= {{ goToMemberHome }}>
           <LandingPage />
         </viewContext.Provider>
