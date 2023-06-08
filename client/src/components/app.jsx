@@ -59,7 +59,7 @@ export default function App() {
       <>
         <h1>
           <button onClick={() => goToMemberHome(member.email)}> {'<- Bands'} </button>
-          GigMate/${member.name}/{currentBand.band_name}
+          GigMate/{member.name}/{currentBand.band_name}
         </h1>
         <div className="page">
           <viewContext.Provider  value= {{ goToBandPage, gigs, currentBand }}>

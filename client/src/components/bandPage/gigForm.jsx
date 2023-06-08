@@ -26,7 +26,7 @@ export default function GigForm({ band, setForm }) {
 
   return (
     <div className="modal-container">
-      <form className="modal" onSubmit={submitForm}>
+      <form className="modal form" onSubmit={submitForm}>
         <label>
           What? <input name="gigname"  required/>
         </label>
@@ -36,14 +36,13 @@ export default function GigForm({ band, setForm }) {
         <label>
           Where? <input name="location" required/>
         </label>
-        <div> How much gear do we need to bring?
+        <div> How much gear do we need to bring?</div>
           <label><input type="radio" name="gear_needed" value="The basics"/>The Basics</label>
           <label><input type="radio" name="gear_needed" value="Be prepared" defaultChecked={true} />Be Prepared</label>
           <label><input type="radio" name="gear_needed" value="Full setup"/>Full Setup</label>
           {modal
           ? <GearModal type="all" setModal={setModal} />
           : <button onClick={() => setModal(true)}>?</button>}
-        </div>
         <button type="submit" >submit</button>
         <button onClick={() => setForm(false)}>x</button>
       </form>
