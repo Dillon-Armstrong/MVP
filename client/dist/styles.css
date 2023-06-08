@@ -55,8 +55,9 @@ button {
 
 .modal-container {
   z-index: 1000;
-  background-color: aqua;
-  opacity: 50%;
+  background-color: var(--light-alt);
+  color: var(--main-dark);
+  opacity: 90%;
   position: fixed;
   width: 100%;
   height: 100%;
